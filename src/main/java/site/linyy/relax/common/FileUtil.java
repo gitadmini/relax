@@ -97,6 +97,26 @@ public class FileUtil {
         writer.close();
     }
 
+    // 查询某个目录下的文件
+    public static List<Map<String, String>> getList(String path, String search)
+            throws IOException {
+
+        List<Map<String, String>> list = getList(path);
+        if (StringUtils.isNotBlank(search)) {
+            List<Map<String, String>> result = new ArrayList<Map<String, String>>();
+            if (list != null && list.size() > 0) {
+                for (int i = 0; i < list.size(); i++) {
+                    if (list.get(i).get("name").contains(search)) {
+                        result.add(list.get(i));
+                    }
+                }
+            }
+            return result;
+        } else {
+            return list;
+        }
+    }
+
     /**获得文件夹中所有文件的绝对路径和文件类型.
      */
     public static List<Map<String, String>> getList(String path)

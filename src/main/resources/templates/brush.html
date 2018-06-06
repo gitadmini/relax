@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html class="no-js" lang="zh-CN"><head>
+<meta charset="UTF-8">
+<title>刷子</title>
+<link rel="stylesheet" type="text/css" media="all" href="/brush/style.css">
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3626722-3']);
+  _gaq.push(['_setDomainName', '.lightcss.com']);
+  _gaq.push(['_trackPageview']);
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+</head>
+<body >
+	<div id="comments"></div>
+<!-- Canvas from http://paulirish.com/2010/my-harmonious-background-canvas/ -->
+<script src="/brush/harmony.js"></script>
+<script>harmony()</script>
+<script type="text/javascript">
+jQuery(function($){
+  $('.entry-content a[href*="://"]:not([href*="' + location.hostname + '"])').attr({rel: 'external'});
+  $('a[rel*="external"]').on('click', function() { window.open(this.href); return false; });
+  jQuery('#toc span').on('click',function(){
+    if(jQuery('#toc span').html() == '[显示]'){
+      jQuery('#toc span').html('[隐藏]');
+    }else{
+      jQuery('#toc span').html('[显示]');
+    }
+      jQuery('#toc ul').toggle();
+      jQuery('#toc small').toggle();
+  });
+});
+</script>
+<script type="text/javascript">
+	_stq = window._stq || [];
+	_stq.push([ 'view', {v:'ext',j:'1:6.0',blog:'48344701',post:'66',tz:'8',srv:'lightcss.com'} ]);
+	_stq.push([ 'clickTrackerInit', '48344701', '66' ]);
+</script>
+<!-- 从http://lightcss.com/add-x-ua-compatible-meta-to-your-website/网站copy过来，因看着十分炫酷 -->
