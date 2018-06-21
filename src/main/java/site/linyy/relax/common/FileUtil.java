@@ -137,7 +137,7 @@ public class FileUtil {
         for (int i = 0; i < files.length; i++) {
             Map<String, String> map = new HashMap<String, String>();
             String fullPath = files[i].getCanonicalPath();
-            String[] paths = fullPath.split("\\");
+            String[] paths = fullPath.split("\\\\");
             String name = paths[paths.length - 1];
             map.put("path", fullPath);
             map.put("name", name);
@@ -145,5 +145,21 @@ public class FileUtil {
             list.add(map);
         }
         return list;
+    }
+
+    // 获取根目录
+    public static String[] getMenuFolder() {
+
+        File[] files = File.listRoots();
+        String[] p = new String[files.length];
+        for (int i = 0; i < files.length; i++) {
+            try {
+                String path = files[i].getCanonicalPath();
+                p[i] = path;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return p;
     }
 }

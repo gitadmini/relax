@@ -1,0 +1,111 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" >
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
+    <title>收藏</title>
+
+    <!-- Bootstrap -->
+    <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/bootstrap-3.3.7-dist/css/bootstrap-theme.css" rel="stylesheet">
+    <link href="/bootstrap-3.3.7-dist/css/bootstrap.css" rel="stylesheet">
+    <link href="/bootstrap-3.3.7-dist/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim 和 Respond.js 是为了让 IE8 支持 HTML5 元素和媒体查询（media queries）功能 -->
+    <!-- 警告：通过 file:// 协议（就是直接将 html 页面拖拽到浏览器中）访问页面时 Respond.js 不起作用 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+	<nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#" th:text="${beauty}">Brand</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        
+          <ul class="nav navbar-nav navbar-right" th:each="f:${menuFolder}">
+            <li><a href="#" th:href="@{'/index?path='+${@commonService.escape('__${f}__')}}" th:text="${f}">Link</a></li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  	
+  	<div class="alert alert-success" role="alert" id="delSuccDiv" style="display: none">删除成功!</div>
+  	
+  	<table class="table table-striped">
+      <tbody>
+        <tr th:each="b:${list}">
+	      <td>
+	     	<a th:href="@{'/index?path=' + ${@commonService.escape('__${b.path}__')} + '%5C&search=' + ${@commonService.escape('__${b.search}__')}}">
+	        	<span class="glyphicon glyphicon-folder-open" th:text="' ' + ${b.showPath}" aria-hidden="true" style="width:100%;"> Mark</span>
+         	</a>
+	      </td>
+	      <td class="blockquote-reverse">
+	      	<button type="button" class="btn btn-default" id="del" name="del" onclick="del(this)">删除</button>
+	      	<input type="hidden" name="path" th:value="${b.path}" />
+	      	<input type="hidden" name="search" th:value="${b.search}" />
+	      </td>
+        </tr>
+      </tbody>
+    </table>
+    
+    <!-- jQuery (Bootstrap 的所有 JavaScript 插件都依赖 jQuery，所以必须放在前边) -->
+    <script src="/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
+    <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
+    <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    
+    <script>
+    	function del(element){
+    		var path = $(element).siblings("input[name='path']").val();
+    		var search = $(element).siblings("input[name='search']").val();
+    		$.post("/del",
+		        {
+		        path:path,
+		        search:search,
+		  	    },
+		        function(data,status){
+			        if(status == 'success'){
+			        	$(element).parent().parent().fadeOut();
+			        	$("#delSuccDiv").fadeIn();
+			        }else{
+			        	console.log("error");	
+			        }
+		    });
+    	}	
+    </script>
+
+  </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
