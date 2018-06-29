@@ -33,7 +33,7 @@ public class FfmpegService {
             throws IOException, InterruptedException {
 
         String newPath = path + ".生成";
-        File file = new File(path);
+        File file = new File(newPath);
         if (file.exists()) {
             Vari.setMsgList(newPath + " 文件已存在!", 10);
             return;
