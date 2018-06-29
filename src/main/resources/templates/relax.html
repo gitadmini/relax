@@ -46,7 +46,7 @@
 	          <a href="#" id="showPathId" class="dropdown-toggle" th:text="${showPath}" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
 	          <ul class="dropdown-menu" th:each="cru:${crumb}">
 	            <li>
-	            	<a href="#" th:href="@{'/index?path='+${@commonService.escape('__${cru.path}__')}}" th:text="${cru.showPath}">Action</a>
+	            	<a href="#" th:href="@{'/index?path='+${@commonService.escape('__${cru.path.replace('''','''''')}__')}}" th:text="${cru.showPath}">Action</a>
 	            </li>
 	          </ul>
 	        </li>
@@ -60,17 +60,15 @@
             <button type="button" class="btn btn-default" onclick="collect()">收藏</button>
           </form>
           <ul class="nav navbar-nav navbar-right">
-          	<li><a href='/collect'>收藏</a></li>
+          	<li><a href='/collect'>收藏夹</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right" th:each="f:${menuFolder}">
-            <li><a href="#" th:href="@{'/index?path='+${@commonService.escape('__${f}__')}}" th:text="${f}">Link</a></li>
+            <li><a href="#" th:href="@{'/index?path='+${@commonService.escape('__${f.replace('''','''''')}__')}}" th:text="${f}">Link</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
     
-  	<div class="alert alert-success" role="alert" id="collectSuccDiv" style="display: none">收藏成功!</div>
-  	
   	<div id="videoDiv" style="display: none">
   		<video id="video" width="250" height="250" controls="controls" autoplay>
   			<source id="source" src="" type="video/mp4">
@@ -82,14 +80,14 @@
       <tbody>
         <tr th:each="b:${list}">
 	      <td th:if="${b.flag eq 'true'}">
-	     	<a th:href="@{'/index?path=' + ${@commonService.escape('__${b.path}__')} + '%5C'}">
+	     	<a th:href="@{'/index?path=' + ${@commonService.escape('__${b.path.replace('''','''''')}__')} + '%5C'}">
 	        	<span class="glyphicon glyphicon-folder-open" th:text="' '+${b.name}" aria-hidden="true" style="width:100%;"> Mark</span>
          	 </a>
 	      </td>
           <td th:if="${b.flag eq 'false'}">
-       		<span th:if="${@commonService.endsWith('__${b.name}__',{'avi','wmv','mpeg','mp4','mov','mkv','flv','f4v','m4v','rmvb','rm','3gp','dat','ts','mts','vob'})}" th:onclick="'generate(\'' + ${@commonService.replace('__${b.path}__')} + '\')'" class="glyphicon glyphicon-facetime-video" th:text="' '+${b.name}" aria-hidden="true"> Mark</span>
-          	<span th:if="${@commonService.endsWith('__${b.name}__',{'生成'})}" th:onclick="'play(\'' + ${@commonService.pathToSource('__${b.path}__')} + '\')'" class="glyphicon glyphicon-play" th:text="' '+${b.name}" aria-hidden="true"> Mark</span>
-          	<span th:if="!${@commonService.endsWith('__${b.name}__',{'生成','avi','wmv','mpeg','mp4','mov','mkv','flv','f4v','m4v','rmvb','rm','3gp','dat','ts','mts','vob'})}" class="glyphicon glyphicon-file" th:text="' '+${b.name}" aria-hidden="true"> Mark</span>
+       		<span th:if='${@commonService.endsWith("__${b.name}__",{"avi","wmv","mpeg","mp4","mov","mkv","flv","f4v","m4v","rmvb","rm","3gp","dat","ts","mts","vob"})}' th:onclick="'generate(\'' + ${@commonService.replace('__${b.path.replace('''','''''')}__')} + '\')'" class="glyphicon glyphicon-facetime-video" th:text="' '+${b.name}" aria-hidden="true"> Mark</span>
+          	<span th:if='${@commonService.endsWith("__${b.name}__",{"生成"})}' th:onclick="'play(\'' + ${@commonService.pathToSource('__${b.path.replace('''','''''')}__')} + '\')'" class="glyphicon glyphicon-play" th:text="' '+${b.name}" aria-hidden="true"> Mark</span>
+          	<a th:if='!${@commonService.endsWith("__${b.name}__",{"生成","avi","wmv","mpeg","mp4","mov","mkv","flv","f4v","m4v","rmvb","rm","3gp","dat","ts","mts","vob"})}' th:href='${@commonService.pathToSource("__${b.path}__")}' class="glyphicon glyphicon-file" th:text="' '+${b.name}" aria-hidden="true"> Mark</a>
           </td>
         </tr>
       </tbody>
@@ -116,7 +114,7 @@
 		  	    },
 		        function(data,status){
 			        if(status == 'success'){
-			        	$("#collectSuccDiv").fadeIn();;
+			        	msgDiv("收藏成功!");
 			        }else{
 			        	console.log("error");	
 			        }

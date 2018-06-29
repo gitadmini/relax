@@ -9,7 +9,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- 上述3个meta标签*必须*放在最前面，任何其他内容都*必须*跟随其后！ -->
-    <title>收藏</title>
+    <title>收藏夹</title>
 
     <!-- Bootstrap -->
     <link href="/bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
@@ -42,19 +42,17 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         
           <ul class="nav navbar-nav navbar-right" th:each="f:${menuFolder}">
-            <li><a href="#" th:href="@{'/index?path='+${@commonService.escape('__${f}__')}}" th:text="${f}">Link</a></li>
+            <li><a href="#" th:href="@{'/index?path='+${@commonService.escape('__${f.replace('''','''''')}__')}}" th:text="${f}">Link</a></li>
           </ul>
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
   	
-  	<div class="alert alert-success" role="alert" id="delSuccDiv" style="display: none">删除成功!</div>
-  	
   	<table class="table table-striped">
       <tbody>
         <tr th:each="b:${list}">
 	      <td>
-	     	<a th:href="@{'/index?path=' + ${@commonService.escape('__${b.path}__')} + '%5C&search=' + ${@commonService.escape('__${b.search}__')}}">
+	     	<a th:href="@{'/index?path=' + ${@commonService.escape('__${b.path.replace('''','''''')}__')} + '%5C&search=' + ${@commonService.escape('__${b.search.replace('''','''''')}__')}}">
 	        	<span class="glyphicon glyphicon-folder-open" th:text="' ' + ${b.showPath}" aria-hidden="true" style="width:100%;"> Mark</span>
          	</a>
 	      </td>
@@ -71,6 +69,7 @@
     <script src="/bootstrap-3.3.7-dist/js/jquery.min.js"></script>
     <!-- 加载 Bootstrap 的所有 JavaScript 插件。你也可以根据需要只加载单个插件。 -->
     <script src="/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="/r/common.js"></script>
     
     <script>
     	function del(element){
@@ -84,7 +83,7 @@
 		        function(data,status){
 			        if(status == 'success'){
 			        	$(element).parent().parent().fadeOut();
-			        	$("#delSuccDiv").fadeIn();
+			        	msgDiv("删除成功!");
 			        }else{
 			        	console.log("error");	
 			        }

@@ -1,5 +1,8 @@
 package site.linyy.relax;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
@@ -20,7 +23,10 @@ public class RelaxApplication {
         return new RestTemplate();
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnknownHostException {
         SpringApplication.run(RelaxApplication.class, args);
+        InetAddress ia = InetAddress.getLocalHost();
+        System.out.println("访问地址:(复杂网络可能不是这个)");
+        System.out.println(ia.getHostAddress() + "/collect");
     }
 }

@@ -1,12 +1,14 @@
 package site.linyy.relax.service;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -15,6 +17,8 @@ import site.linyy.relax.sys.Vari;
 
 @Service
 public class FfmpegService {
+
+    Logger logger = Logger.getLogger(FfmpegService.class);
 
     // 存储执行中的cmd
     public static List<String> cmdList = new ArrayList<String>();
@@ -29,9 +33,14 @@ public class FfmpegService {
             throws IOException, InterruptedException {
 
         String newPath = path + ".生成";
+        File file = new File(path);
+        if (file.exists()) {
+            Vari.setMsgList(newPath + " 文件已存在!", 10);
+            return;
+        }
         // libxvid 比 libx264 生成的文件小，因此效率高，但是画面差
         String cmd = ffPath + "ffmpeg.exe -y -i " + path
-                + " -f mp4 -vcodec libxvid -movflags faststart " + newPath;
+                + " -f mp4 -vcodec libx264 -movflags faststart " + newPath;
         if (cmdList.contains(cmd)) {
             return; // 正在执行
         }
@@ -48,6 +57,7 @@ public class FfmpegService {
         // 执行完毕
         cmdList.remove(cmd);
         Vari.setMsgList(path + "生成结束!", 10); // 10秒生存时间的消息，供前端获取
+        logger.info(path + "生成结束!");
     }
 
 }

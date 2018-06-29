@@ -6,7 +6,7 @@ var timeInterval = setInterval(function() {
 //页面显示消息
 function msgDiv(msg){
 	$("body").prepend('<div id="msgDiv" class="alert alert-warning alert-dismissible" role="alert"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'+msg+'</div>');
-	$("#msgDiv").fadeOut().fadeIn().fadeOut().fadeIn().fadeOut().fadeIn(); //闪啊闪啊闪	
+	$("#msgDiv").fadeOut().fadeIn().fadeOut().fadeIn(); //闪啊闪啊闪	
 	$('html, body').animate({scrollTop: $('#msgDiv').offset().top}, 1000); //滚动到锚点
 }
 
