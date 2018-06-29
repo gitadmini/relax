@@ -27,4 +27,8 @@ java模板引擎，thymeleaf：不是胸腺，而是把java的动态变量，写
 ### 界面：
 ![iphone6s safari](https://upload-images.jianshu.io/upload_images/12861224-5dd738d6a349f289.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-如果有技术上的问题，请联系我，我的手机号是138 8了8了8了8。
+如果有技术上的问题，请联系我，我的手机号是138 8了8了8了8。  
+
+---
+如果用的觉得好，可以赏个小钱儿，不胜感激。  
+![打赏](https://github.com/gitadmini/common/blob/master/IMG_2634.JPG)
