@@ -27,6 +27,6 @@ public class RelaxApplication {
         SpringApplication.run(RelaxApplication.class, args);
         InetAddress ia = InetAddress.getLocalHost();
         System.out.println("访问地址:(复杂网络可能不是这个)");
-        System.out.println(ia.getHostAddress() + "/collect");
+        System.out.println(ia.getHostAddress());
     }
 }
