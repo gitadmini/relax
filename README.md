@@ -21,7 +21,7 @@ java模板引擎，thymeleaf：不是胸腺，而是把java的动态变量，写
  1. [下载](https://github.com/gitadmini/relax/archive/master.zip)文件，并解压到任意目录。
  2. 修改配置参数：打开文件\relax-master\src\main\resources\application-dev.properties，修改ffmpeg.path=F:\\\\relax\\\\ffmpeg-20180619-830695b-win64-static\\\\bin\\\\，等号后面写你的ffmpeg的bin目录。
  3. 编译并运行：运行cmd窗口，cd到relax-master目录（例如：cd F:\relax-master），切换磁盘（例如：F:），执行打包命令mvn clean package -Dmaven.test.skip=true，成功后cd到target目录（cd target），运行程序java -jar relax-0.0.1-SNAPSHOT.jar。
-* 将手机连入电脑所在的局域网中，打开浏览器输入共享电脑的局域网地址+/collect，例如：192.168.11.101/collect，后面的操作都比较傻瓜式。
+* 将手机连入电脑所在的局域网中，打开浏览器输入共享电脑的局域网地址，例如：192.168.11.101，后面的操作都比较傻瓜式。
 
 ---
 ### 界面：
