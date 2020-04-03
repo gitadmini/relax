@@ -9,8 +9,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ExampleController {
 
     @RequestMapping("/brush")
-    public String c() {
+    public String brush() {
         return "brush";
+    }
+
+    @RequestMapping("/speech")
+    public String speech(){
+        return "speech";
     }
 
 }
